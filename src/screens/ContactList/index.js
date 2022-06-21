@@ -12,9 +12,11 @@ const ContactList = (props) => {
     const getData = async() =>{
    const apiData = await axios.get('https://s3.amazonaws.com/technical-challenge/v3/contacts.json')
    const favList = apiData?.data?.filter(itm=>itm?.isFavorite)
+   const sortFavList = favList.sort((a, b) => a.name.localeCompare(b.name))
    const unFavList =apiData?.data?.filter(itm=>!itm?.isFavorite)
+   const sortUnFavList = unFavList.sort((a, b) => a.name.localeCompare(b.name))
    setDataList([
-       {title:"Favorite Contacts",data:favList},{title:"Other Contacts",data:unFavList}
+       {title:"Favorite Contacts",data:sortFavList},{title:"Other Contacts",data:sortUnFavList}
    ])
  
     }
